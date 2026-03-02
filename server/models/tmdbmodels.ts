@@ -25,6 +25,15 @@ export interface TmdbReviewResponse {
   total_results: number;
 }
 
+//Normalised
+
+export interface Review {
+  author: string;
+  content: string;
+  url: string;     // link to original review
+}
+
+
 /***********************/
  /      MOVIE INFO      /
  /**********************/
@@ -53,3 +62,16 @@ export interface TmdbMovieSearchResponse {
   total_pages: number;
   total_results: number;
 }
+
+//Normalised
+
+export interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  posterUrl: string;   // full image URL
+  releaseDate: string;
+  rating: number;
+  voteCount: number;
+}
+
