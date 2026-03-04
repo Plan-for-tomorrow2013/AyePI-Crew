@@ -1,5 +1,5 @@
 import request from 'superagent'
-import Movie from '../../models/Movie'
+import Movie from '../../interface/Movie'
 
 
 export async function getMovies() {
