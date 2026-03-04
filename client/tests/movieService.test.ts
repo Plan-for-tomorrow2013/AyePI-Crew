@@ -7,60 +7,80 @@ import { render, screen } from '@testing-library/react'
 
 TESTS
 
-//Movie test also handles loading, error, search checks which would be repeated in AI
-
 Movie service returns expected data
 
-describe('Movie review service', () => {
+const mockMovies = [
+  { id: 1, title: 'Inception', releaseDate: '2010', overview: 'A mind-bending thriller.' },
+  { id: 2, title: 'Highlander', releaseDate: '1986', overview: 'Fighting with style.' },
+]
+
+const mockReviews = [
+  { id: 'r1', author: 'Alice', content: 'Amazing movie!' },
+  { id: 'r2', author: 'Bob', content: 'Pretty good.' },
+]
+
+
+describe('MoviePage component', () => {
+  
+beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
 test ('renders search input', async () => {
-  render(<MoviePage />)
+  render(<MoviePage loading={false} error={null} movies={[]} reviews={[]} />)
   expect(screen.getByRole('textbox')).toBeInTheDocument()
 })
 
 test('shows loading state', () =>{
-render(<MoviePage loading={true} />)
-expect(screen.getByTestId('loading')).toBeVisible()
+  render(<MoviePage loading={true} results={[]} error={null} reviews={[]} />)
+  expect(screen.getByTestId('loading')).toBeVisible()
 })
 
-test('hides loading state when not loading', () =>{
-render(<MoviePage loading={false} />)
-expect(screen.getByTestId('loading')).toBeNull()
+test('hides loading state when not loading', () => {
+    render(<MoviePage loading={false} error={null} movies={[]} reviews={[]} />)
+    expect(screen.queryByTestId('loading')).toBeNull()
 })
-
 
 test('displays error message', () => {
-render(<MoviePage error="Failed to fetch" />)
-expect(screen.getByText(/failed to fetch/i)).toBeVisible()
+  render(<MoviePage loading={false} results={[]} error="Failed to fetch" reviews={[]} />)
+  expect(screen.getByText(/failed to fetch/i)).toBeVisible()
 })
 
-test('handles empty search results', () => {
-  render(<MoviePage results={[]} />)
+test('renders empty movie results when no error', () => {
+  render(<MoviePage loading={false} results={[]} error={null} review={[]} />)
+  expect(screen.getByText(/no movies found/i)).toBeVisible()
+})
+
+test('renders empty review results when no error', () => {
+  render(<MoviePage loading={false} results={[]} error={null} review={[]} />)
   expect(screen.getByText(/no results found/i)).toBeVisible()
 })
 
-test('displays movie data', () =>{
-render(<MoviePage...)
+test ('renders movie results when available', async () =>{
+  render(<MoviePage loading={false} movies={mockMovies} reviews={[]} error={null />})
+  mockResults.forEach(movie=> {
+  expect(screen.getByText(movie.title)).toBeVisible()
+  expect(screen.getByText(movie.releaseDate)).toBeVisible()
+  expect(screen.getByText(movie.overview)).toBeVisible()
+  })
 })
 
-test('returns a valid movie response', async () => {
-(getMovieResponse as jest.Mock).mockResovedValue({nnnn})
-const result = await getMovieResponse('some input')
-expect (result.toHaveProperty('text', 'nnnn'))
-}) --MODELS? expect(screen.getByText(/Batman/i)).toBeVisible() etc.
-  
+test ('renders review results when available', async () =>{
+  render(<MoviePage loading={false} movies={[]} reviews={mockReviews} error={null />})
+  mockResults.forEach(review=> {
+  expect(screen.getByText(review.author)).toBeVisible()
+  expect(screen.getByText(review.content)).toBeVisible()
+  })
+})
 
-test('returns a valid review response', async () => {
-(getReviewResponse as jest.Mock).mockResovedValue({nnnn})
-const result = await getReview('some input')
-expect (result.toHaveProperty('text', 'nnnn'))
-}) --MODELS? expect(screen.getByText(/Fabulous/i)).toBeVisible() etc.
-  
-
-)}
-
+  test('displays both movies and reviews together', () => {
+    render(<MoviePage loading={false} error={null} movies={mockMovies} reviews={mockReviews} />)
+    mockMovies.forEach(movie => expect(screen.getByText(movie.title)).toBeVisible())
+    mockReviews.forEach(review => expect(screen.getByText(review.content)).toBeVisible())
+  })
+})
 
 
-Optional: edge cases for empty input?? Maybe handled on app page.
+})
 
-
-  */}
+*/}
