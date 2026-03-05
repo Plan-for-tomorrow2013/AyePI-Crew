@@ -36,9 +36,6 @@ const App = () => {
             <img src={movie.posterUrl} alt={`${movie.title} poster`} />
             <p>Release Date: {movie.releaseDate}</p>
             <p>Rating: {movie.rating} ({movie.voteCount} votes)</p>
-            <a href={`/movies/${movie.id}`} className="text-blue-500 hover:underline">
-              Learn more
-            </a>
           </div>
         ))}
       </div>
