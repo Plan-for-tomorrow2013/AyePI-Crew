@@ -28,18 +28,20 @@ const App = () => {
           There was an error retrieving the movies.
         </p>
       )}
-      <ul>
+      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {movies?.map(movie => (
-          <li key={movie.id}>
+          <div key={movie.id} className="p-4 border rounded-lg shadow-md overflow-hidden">
             <h2>{movie.title}</h2>
             <p>{movie.overview}</p>
             <img src={movie.posterUrl} alt={`${movie.title} poster`} />
             <p>Release Date: {movie.releaseDate}</p>
             <p>Rating: {movie.rating} ({movie.voteCount} votes)</p>
-            <link href={`/movies/${movie.id}`}>Learn more</link>
-          </li>
+            <a href={`/movies/${movie.id}`} className="text-blue-500 hover:underline">
+              Learn more
+            </a>
+          </div>
         ))}
-      </ul>
+      </div>
     </>
     // <>
     //   {count}
