@@ -1,7 +1,7 @@
 //Possible models for handling API errors, to be applied if we use
 //a service layer, query builder & http error check utils.
 
-//Or somthing else?
+//Or somthing else? Delete if preferred
 
 
 //Applied at http level, in service function called by router

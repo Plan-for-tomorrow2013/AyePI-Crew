@@ -5,6 +5,13 @@ Data transform / movie model
 AI response format
 Route responses
 
+
+# Integrate
+
+Update with correct functions, imports etc and uncomment
+
+# Test the tests
+
 Example
 
 describe('Movie Model', () => {
