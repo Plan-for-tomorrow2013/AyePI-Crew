@@ -1,8 +1,7 @@
 import { RenderWithState } from '../../utils/testHelpers'
 
 
-{/*{ getMovieResponse } from '../utils/movieService'
-jest.mock('../utils/movieService')
+{/*
 import { Movie, Review } from '../models/TMDB.ts'
 import MoviePage from '../pages/MoviePage'
 import { render, screen } from '@testing-library/react'
@@ -10,7 +9,7 @@ import { render, screen } from '@testing-library/react'
 
 TESTS
 
-Movie service returns expected data
+Movie component returns expected data
 
 const mockMovies = [
   { id: 1, title: 'Inception', releaseDate: '2010', overview: 'A mind-bending thriller.' },
