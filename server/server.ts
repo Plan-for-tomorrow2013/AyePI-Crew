@@ -7,6 +7,7 @@ const server = express()
 server.use(express.json())
 server.use(cors('*' as CorsOptions))
 
+server.use('/api/v1/movies', movies)
 
 // server.get('/api/v1/greeting', (req, res) => {
 //   const greetings = ['hola', 'hi', 'hello', 'howdy']
@@ -22,7 +23,5 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(Path.resolve('./dist/index.html'))
   })
 }
-
-server.use('/api/v1/movies', movies)
 
 export default server
