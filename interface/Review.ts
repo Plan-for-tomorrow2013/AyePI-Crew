@@ -1,5 +1,3 @@
-
-
 /*
  * A single review returned for a movie
  * TMDB `/movie/{id}/reviews` r

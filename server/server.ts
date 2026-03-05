@@ -1,11 +1,11 @@
 // import * as Path from 'node:path'
 import express from 'express'
-import cors, { CorsOptions } from 'cors'
+// import cors, { CorsOptions } from 'cors'
 import movies from './routes/movies'
 
 const server = express()
 server.use(express.json())
-server.use(cors('*' as CorsOptions))
+// server.use(cors('*' as CorsOptions))
 
 // server.get('/api/v1/greeting', (req, res) => {
 //   const greetings = ['hola', 'hi', 'hello', 'howdy']
