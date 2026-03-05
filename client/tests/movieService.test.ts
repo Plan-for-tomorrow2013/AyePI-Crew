@@ -1,3 +1,6 @@
+import { RenderWithState } from '../../utils/testHelpers'
+
+
 {/*{ getMovieResponse } from '../utils/movieService'
 jest.mock('../utils/movieService')
 import { Movie, Review } from '../models/TMDB.ts'
@@ -27,22 +30,22 @@ beforeEach(() => {
   })
 
 test ('renders search input', async () => {
-  render(<MoviePage loading={false} error={null} movies={[]} reviews={[]} />)
+  render(<MoviePage />)
   expect(screen.getByRole('textbox')).toBeInTheDocument()
 })
 
 test('shows loading state', () =>{
-  render(<MoviePage loading={true} results={[]} error={null} reviews={[]} />)
+  renderWithState({component: <MoviePage />, loading: true})
   expect(screen.getByTestId('loading')).toBeVisible()
 })
 
 test('hides loading state when not loading', () => {
-    render(<MoviePage loading={false} error={null} movies={[]} reviews={[]} />)
+    renderWithState({component: <MoviePage />, loading: false })
     expect(screen.queryByTestId('loading')).toBeNull()
 })
 
 test('displays error message', () => {
-  render(<MoviePage loading={false} results={[]} error="Failed to fetch" reviews={[]} />)
+  renderWithState({component: <MoviePage />, error: "Failed to fetch"})
   expect(screen.getByText(/failed to fetch/i)).toBeVisible()
 })
 

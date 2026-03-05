@@ -1,7 +1,9 @@
+import { RenderWithState } from '../../utils/testHelpers'
 
 {/*{ getAIResponse } from '../utils/aiService'
 jest.mock('../utils/aiService')
 
+import testHelpers.ts
 
   TESTS
 AI service returns expected data
@@ -18,22 +20,22 @@ describe('AI service', () =>{
     })
 
     test('shows loading state', () => {
-      render(<AIPage loading={true} />)
+      renderWithState({component: <AIPage />, loading: true />)
       expect(screen.getByTestId('loading')).toBeVisible()
     })
 
     test('displays error message', () => {
-      render(<AIPage error="AI failed" />)
-      expect(screen.getByText(/ai failed/i)).toBeVisible()
+      renderWithState({component: <AIPage />, error: "AI call failed" />)
+      expect(screen.getByText(/ai call failed/i)).toBeVisible()
     })
 
     test('displays AI response', () => {
-      render(<AIPage results={[{ text: 'Hello AI' }]} />)
+      renderWithState({component: <AIPage /> results: [{ text: 'Hello AI' }] })
       expect(screen.getByText(/Hello AI/i)).toBeVisible()
     })
 
     test('handles empty AI response gracefully', () => {
-      render(<AIPage results={[]} />)
+      renderWithState({component: <AIPage /> results: {[]} })
       expect(screen.getByText(/no results found/i)).toBeVisible()
     })
 
@@ -42,25 +44,5 @@ describe('AI service', () =>{
  
 })
 
-import { render } from '@testing-library/react'
-import React, { ReactElement } from 'react'
-
-interface RenderWithStateProps {
-  component: ReactElement
-  loading?: boolean
-  error?: string | null
-  results?: any[]
-}
-
-export function renderWithState({
-  component,
-  loading = false,
-  error = null,
-  results = []
-}: RenderWithStateProps) {
-  return render(
-    React.cloneElement(component, { loading, error, results })
-  )
-}
 
   */}
