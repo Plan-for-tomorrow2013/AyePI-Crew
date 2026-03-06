@@ -26,6 +26,7 @@ export interface TmdbReviewResponse {
 // Normalised
 
 export interface Review {
+  id?: string;
   author: string;
   content: string;
   url: string;     // link to original review
