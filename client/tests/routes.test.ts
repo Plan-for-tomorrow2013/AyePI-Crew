@@ -1,58 +1,58 @@
+import { vi } from 'vitest'
 import request from 'supertest'
-import app from '../app'
+// App import would go here when ready
+// import app from '../components/App'
 
-{/*
-  ROUTE TESTS:
+/*
+  API Route Tests (Client side):
 
-  Route returns correct data
-  Missing parameters handled properly
-  Status codes correct
-  Mocked services so tests don’t depend on real API
+  - Validate route returns data
+  - Validate missing parameters return 400
+  - Validate empty responses
+  - Mocked services to avoid real API calls
+*/
 
-import * as aiService from '../utils/aiService'
-import * as movieService from '..utils/movieService'
+vi.mock('../../server/tests/aiService.test', () => ({
+  getAIResponse:vi.fn(),
+}))
+vi.mock('../../server/tests/movieService.test', () => ({
+  getMovieResponse:vi.fn(),
+  searchMovies: vi.fn(),
+  getReviews: vi.fn(),
+}))
 
-jest.mock('../utils/aiService')
-jest.mock('../utils/movieService')
-
-describe('API Routes (Client tests)', () => {
+describe.skip('API Routes (Client tests)', () => {
    beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
 //AI ROUTES  
-  test('GET /api/v1/ai returns data', async () => (
-    (aiService.getAIResponse as jest.Mock)
+  test('GET /api/v1/ai returns data', async () => {
+    (aiService.getAIResponse as vi.Mock)
     .mockResolvedValue({ text: 'Hello' })
-  
     const res = await request(app).get(`/api/v1/ai?input=test`)
-  
     expect(res.status).toBe(200)
     expect(res.body.text).toBe('Hello')
-  ))
+})
 
   test('GET /api/v1/ai missing input returns 400', async () => {
-  const res = await request(app).get('/api/v1/ai')
-  expect (res.status).toBe(400)
+    const res = await request(app).get('/api/v1/ai')
+    expect (res.status).toBe(400)
   })
 
 //MOVIE ROUTES  
-  test('GET /api/v1/movies returns movie data', async () => (
-    (movieService.searchMovies as jest.Mock)
+  test('GET /api/v1/movies returns movie data', async () => {
+    (movieService.searchMovies as vi.Mock)
     .mockResolvedValue({ title: 'Batman' })
-  
     const res = await request(app).get(`/api/v1/movies?query=Batman`)
-  
     expect(res.status).toBe(200)
     expect(res.body[0].title).toBe('Batman')
-  ))
+})
 
-  test('GET /api/v1/movies empty results', async,() => {
-    (movieService.searchMovies as jest.Mock)
+  test('GET /api/v1/movies empty results', async () => {
+    (movieService.searchMovies as vi.Mock)
     .mockResolvedValue([])
-  
     const res = await request(app).get(`/api/v1/movies?query=UnknownMovie`)
-  
     expect(res.status).toBe(200)
     expect(res.body).toHaveLength(0)
   })
@@ -63,22 +63,18 @@ describe('API Routes (Client tests)', () => {
   })
 
 //REVIEWS ROUTES  
-  test('GET /api/v1/reviews returns review data', async () => (
+  test('GET /api/v1/reviews returns review data', async () => {
     const mockReviews = [{ content: 'Fabulous' }]
-    (movieService.getReviews as jest.Mock)
+    (movieService.getReviews as vi.Mock)
     .mockResolvedValue(mockReviews)
-  
     const res = await request(app).get(`/api/v1/reviews?query=99`)
-  
     expect(res.status).toBe(200)
     expect(res.body[0].content).toBe('Fabulous')
-  ))
+})
 
-  test('GET /api/v1/reviews empty results', async,() => {
-  (movieService.getReviews as jest.Mock).mockResolvedValue([])
-  
+  test('GET /api/v1/reviews empty results', async () => {
+  (movieService.getReviews as vi.Mock).mockResolvedValue([])
   const res = await request(app).get(`/api/v1/reviews?query=UnknownMovie`)
-  
   expect(res.status).toBe(200)
   expect(res.body).toHaveLength(0)
   })
@@ -87,5 +83,4 @@ describe('API Routes (Client tests)', () => {
   const res = await request(app).get('/api/v1/reviews')
   expect (res.status).toBe(400)
   })
-)}
-  */}
+})
