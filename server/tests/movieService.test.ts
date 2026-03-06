@@ -1,8 +1,10 @@
-{/*
-  import { getMovies, getReviews } from '../../server/utils/movieService'
-  import * as http from '../../server/utils/http'
+// @vitest-environment node
+import { describe, it, expect } from 'vitest'
+import { App } from './App'
+import { searchMovies, getReviews } from '../../server/utils/movieService'
+import * as http from '../../server/utils/http'
 
-  jest.mock('../../server/utils/http')
+  vi.mock('../../server/utils/http')
 
 
 const mockAPIMovies = [
@@ -15,7 +17,7 @@ const mockAPIMovies = [
   release_date: '1989',
   vote_average: 4.5,
   vote_count: 1066,
-  adult: False
+  adult: false
 }
 ]
 
@@ -48,58 +50,52 @@ const mockReviews = [
 }
 ]
 
-describe('Movie Service (server-side)', () => {
+describe.skip('Movie Service (server-side)', () => {
+    beforeEach(() => {
+    vi.clearAllMocks()
+  })
 
 //MOVIES
   test('returns valid transformed movie response', async () => {
-    (http.getJSON as jest.Mock).mockResolvedValue(mockAPIMovies)
-
+    (http.getJSON as vi.Mock).mockResolvedValue(mockAPIMovies)
     const result = await searchMovies('Batman')
     expect(result).toEqual(mockMovies)
   })
 
   test('returns empty movie response gracefully', async () => {
-    (http.getJSON as jest.Mock).mockResolvedValue([])
-    
+    ;(http.getJSON as vi.Mock).mockResolvedValue([])
     const result = await searchMovies('empty input')
-    
-    expect(result).toEqual([]])
+    expect(result).toEqual([])
   })
 
 
   test('handles network errors', async () => {
-    (http.getJSON as jest.Mock).mockRejectedValue
-    (new Error('Network failed')
-    )
+    ;(http.getJSON as vi.Mock).mockRejectedValue
+    (new Error('Network failed'))
     await expect(searchMovies('fail input'))
     .rejects
     .toThrow('Network failed')
   })
 
 //REVIEWS
-
   test('returns valid transformed review response', async () => {
-    (http.getJSON as jest.Mock).mockResolvedValue(mockAPIReviews)
+    ;(http.getJSON as vi.Mock).mockResolvedValue(mockAPIReviews)
 
     const result = await getReviews('99')
     expect(result).toEqual(mockReviews)
   })
 
   test('returns empty reviews response', async () => {
-    (http.getJSON as jest.Mock).mockResolvedValue([])
+    ;(http.getJSON as vi.Mock).mockResolvedValue([])
     const result = await getReviews('empty input')
     expect(result).toEqual([]))
   })
 
 
   test('handles network errors on review failure', async () => {
-    (http.getJSON as jest.Mock).mockRejectedValue
-    (new Error('Network failed')
-    )
+    ;(http.getJSON as vi.Mock).mockRejectedValue
+    (new Error('Network failed'))
     await expect(getReviews('fail input'))
     .rejects
     .toThrow('Network failed')
   })
-})
-})
-  */} 
