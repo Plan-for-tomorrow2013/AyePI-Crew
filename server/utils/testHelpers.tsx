@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
-import React, { ReactElement } from 'react'
+import { render, RenderOptions } from '@testing-library/react'
+import React, { ReactElement, ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from'@tanstack/react-query'
 
 interface RenderWithStateProps {
@@ -11,6 +11,8 @@ interface RenderWithStateProps {
 
 interface RenderWithStateAndQueryClientProps extends RenderWithStateProps {
   options?: Omit<RenderOptions, 'wrapper'>
+  movies?: any[],
+  reviews?: any[],
 }
 
 
@@ -28,6 +30,8 @@ export function renderWithStateAndQueryClient({
   loading = false,
   error = null,
   results = [],
+  movies = [],
+  reviews = [],
   options
 }: RenderWithStateAndQueryClientProps) {
   const queryClient = new QueryClient()

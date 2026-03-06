@@ -1,9 +1,9 @@
 import { vi, describe, test, beforeEach } from 'vitest'
 import '@testing-library/jest-dom'
 import React from 'react'
-import { renderWithStateAndQueryClient } from '../../server/utils/testHelpers'
+import { renderWithStateAndQueryClient } from '../../../server/utils/testHelpers'
 import { render, screen } from '@testing-library/react'
-import App from '../components/App'
+import App from '../../components/App'
 
 
 
@@ -27,7 +27,7 @@ describe.skip('AI component', () =>{
   })
 
     test('renders input box', () => {
-      renderWithStateAndQueryClient(<App />)
+      render(<App />)
       expect(screen.getByRole('textbox')).toBeInTheDocument()
     })
 
@@ -41,8 +41,8 @@ describe.skip('AI component', () =>{
       expect(screen.getByText(/ai call failed/i)).toBeVisible()
     })
 
-    test('displays AI response', () => {
-      renderWithStateAndQueryClient({component: <App />, results: mockAIResponse })
+    test('displays AI response', async () => {
+      renderWithStateAndQueryClient({component: <App />, results: [mockAIResponse] })
       expect(await screen.findByText(mockAIResponse.content)).toBeVisible() 
     })
 
