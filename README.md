@@ -1,31 +1,60 @@
-# Project Documentation Here
+# AyePI-Crew
 
+A full-stack movie database application that uses **The Movie Database (TMDB)** for data and **Google Gemini AI** to provide "alternate commentary" on movie descriptions.
 
-# Boilerplate: React with Express and Vite
+## Features
 
-Boilerplate uses Vite to bundle a React app and Express to serve it in production. Express is used in development to serve an API server.
+- **Trending Movies:** View a live feed of trending movies from TMDB.
+- **AI Critic:** Click "Alternate Commentary" on any movie to have an AI persona (like a snarky critic) rewrite the movie's overview.
+- **Normalised Data:** A robust backend that transforms external API data into a consistent internal format.
+- **Responsive Design:** A clean, grid-based UI built with Tailwind CSS.
 
-Vite React App: [http://localhost:5173](http://localhost:5173)
-Express API Server: [http://localhost:3000](http://localhost:3000)
+## Tech Stack
 
-Requests to `http://localhost:5173/api` are proxied to `http://localhost:3000/api`.
+- **Frontend:** React, Vite, React Query, Tailwind CSS.
+- **Backend:** Node.js, Express, Google Generative AI SDK.
+- **Testing:** Vitest, Supertest, React Testing Library.
+
+---
 
 ## Setup
 
-### Installation
+### 1. Installation
 
-#### **From the Github UI**
-
-See the instructions [here](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) to use Github's feature to create a new repo from a template.
-
-```
-git clone [your-project-ssh-address]
-cd [your-project-name]
-npm install # to install dependencies
-npm run dev # to start the dev server
+```bash
+git clone [your-repo-link]
+cd AyePI-Crew
+npm install
 ```
 
-You can find the server running on [http://localhost:3000](http://localhost:3000) and the client running on [http://localhost:5173](http://localhost:5173).
+### 2. Environment Variables
+
+Create a `.env` file in the root directory and add your API keys:
+
+```bash
+TMDB_API_KEY=your_tmdb_api_key_here
+TMDB_READACCESS_TOKEN=your_tmdb_token_here
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### 3. Development
+
+To start both the client and server in development mode:
+
+```bash
+npm run dev
+```
+
+- **Client:** [http://localhost:5173](http://localhost:5173)
+- **Server:** [http://localhost:3000](http://localhost:3000)
+
+### 4. Testing
+
+To run all tests:
+
+```bash
+npm test -- --run
+```
 
 ---
 

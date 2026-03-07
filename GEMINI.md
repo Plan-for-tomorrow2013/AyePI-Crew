@@ -1,84 +1,63 @@
 # Project Overview
 
-This is a boilerplate project for a full-stack web application using the following technologies:
+**AyePI-Crew** is a full-stack movie application that leverages **The Movie Database (TMDB)** for movie data and uses **Google Generative AI (Gemini)** to generate alternative movie reviews based on specific critic personas.
+
+## Tech Stack
 
 *   **Frontend:** React, Vite, TypeScript, Tailwind CSS
-*   **Backend:** Node.js, Express, TypeScript
+*   **Backend:** Node.js, Express, TypeScript, Google Generative AI SDK
 *   **API Communication:** `superagent` and React Query
+*   **Testing:** Vitest, React Testing Library, Supertest
 
-The project is structured with a `client` directory for the React frontend and a `server` directory for the Express backend.
+## Features
 
-The application fetches a random greeting from the backend and displays it. The user can click a button to fetch a new greeting.
+- **Movie Feed:** Fetches trending movies from TMDB and displays them in a responsive grid.
+- **Data Normalisation:** Backend logic to transform raw TMDB data into clean, internal models (including full poster URLs).
+- **AI Critic:** An "Alternate Commentary" feature that uses AI to rewrite movie overviews into different personas (e.g., Snarky, Funny, Contrarian, Hopeless Romantic).
+- **Interactive UI:** Real-time transformation of movie descriptions via client-side state and AI mutations.
 
-## Building and Running
+## Project Structure
+
+- `client/`: React frontend
+  - `api/`: Domain-specific API clients (`movieApi.ts`, `aiClient.ts`).
+  - `components/`: UI components like `MovieCard` and `App`.
+- `server/`: Express backend
+  - `routes/`: API endpoints for movies and AI critics.
+  - `utils/`: Core business logic, including `normalise.ts` and `promptBuilder.ts`.
+- `interface/`: Shared TypeScript interfaces between client and server.
+
+## Getting Started
+
+### Environment Variables
+You will need a `.env` file in the root directory with the following keys:
+```bash
+TMDB_API_KEY=your_tmdb_api_key_here
+TMDB_READACCESS_TOKEN=your_tmdb_token_here
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
 ### Development
-
-Prompt the user to run the development server themselves in a separate terminal window.
-
+To start the Vite development server and the backend watcher:
 ```bash
 npm run dev
 ```
 
-This will start the Vite development server for the client and the `tsx` watcher for the server.
-
-- The client will be available at `http://localhost:5173`.
-- The server will be available at `http://localhost:3000`.
-
-### Production
-
-To build the project for production, use the following command:
-
-```bash
-npm run build
-```
-
-This will create a `dist` directory with the bundled client and server files.
-
-To start the server in production mode, use the following command:
-
-```bash
-npm start
-```
-
 ### Testing
-
-To run the tests, use the following command:
-
+To run the full test suite (including server and client tests):
 ```bash
 npm test -- --run
 ```
 
 ## Development Conventions
 
-### Linting
-
-This project uses ESLint to enforce code quality. To run the linter, use the following command:
-
-```bash
-npm run lint
-```
-
-### Formatting
-
-This project uses Prettier to format the code. To format the code, use the following command:
-
-```bash
-npm run format
-```
-
-# Development Conventions
-
-*   The project uses TypeScript for both the frontend and backend.
-*   Styling is done with Tailwind CSS.
-*   The project uses `eslint` and `prettier` for code quality and consistency.
-*   API requests are handled by `superagent` and managed with React Query.
-*   The backend provides a single API endpoint at `/api/v1/greeting` which returns a random greeting.
+- **Type Safety:** All data structures should use the shared interfaces in the `interface/` directory.
+- **Modularity:** Keep API routes lean by moving complex logic into `server/utils`.
+- **Validation:** Always include tests for new routes and components.
+- **Styling:** Use Tailwind CSS for a consistent, modern UI.
 
 ## PromptKit Quick Reference
 - Review the available artefacts when the student requests them:
-  - Protocol: `promptkit/protocols/setup.md` — instructions for updating these CLI briefings.
-  - Workflow: `promptkit/workflows/tutor.md` — guide for tutoring/explanation sessions.
-  - Workflow: `promptkit/workflows/reflect.md` — guide for documenting outcomes and next steps.
-- Student notes live in `promptkit/notes/`; The table in `progress-journal.md` is main place to update with reflections. Instructor Activities are in `promptkit/activities/` (read-only).
-- When new workflows arrive, expect additional files under `promptkit/workflows/`.
+  - Protocol: `promptkit/protocols/setup.md`
+  - Workflow: `promptkit/workflows/tutor.md`
+  - Workflow: `promptkit/workflows/reflect.md`
+- Student notes live in `promptkit/notes/progress-journal.md`.
