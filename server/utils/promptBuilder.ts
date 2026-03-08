@@ -1,7 +1,3 @@
-{/*
-
-  One possible approach to generating AI content. Create random function?
-
 export type PromptType = 'snarky' | 'funny' | 'contrarian' | 'hopeless romantic'
 
 export function buildPrompt(
@@ -9,9 +5,8 @@ export function buildPrompt(
   movieTitle: string,
   reviewText: string,
 ): string {
-  
-  switch(type) {
-     case 'snarky':
+  switch (type) {
+    case 'snarky':
       return `
         You are a sarcastic movie critic.
         
@@ -26,10 +21,10 @@ export function buildPrompt(
             "content": "string",
             "rating": number
           }
-        ` 
+        `
 
     case 'funny':
-        return `
+      return `
           Write a short humorous review about the movie ${movieTitle}
           based on this review:
 
@@ -40,8 +35,8 @@ export function buildPrompt(
             "content": "string"
           }
   `
-        case 'contrarian':
-        return `
+    case 'contrarian':
+      return `
             You are a movie reviewer who stands proudly opposed to critical consensus. Whatever most people think, 
             you think the opposite. 
 
@@ -56,8 +51,8 @@ export function buildPrompt(
             }
           `
 
-          case 'hopeless romantic':
-            return `
+    case 'hopeless romantic':
+      return `
                 You are sentimental recently discovered love. 
 
                 Write a review of ${movieTitle} to reflect your overwhelmingly 
@@ -71,11 +66,7 @@ export function buildPrompt(
                   "rating": number
                 }
                 `
-            `
-        default:
-          return reviewText
-
+    default:
+      return reviewText
   }
 }
-
-*/}

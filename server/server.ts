@@ -2,19 +2,14 @@ import * as Path from 'node:path'
 import express from 'express'
 import cors, { CorsOptions } from 'cors'
 import movies from './routes/movies'
+import critic from './routes/critic'
 
 const server = express()
 server.use(express.json())
 server.use(cors('*' as CorsOptions))
 
 server.use('/api/v1/movies', movies)
-
-// server.get('/api/v1/greeting', (req, res) => {
-//   const greetings = ['hola', 'hi', 'hello', 'howdy']
-//   const index = Math.floor(Math.random() * greetings.length)
-//   console.log(index)
-//   res.json({ greeting: greetings[index] })
-// })
+server.use('/api/v1/critic', critic)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
