@@ -1,6 +1,7 @@
-import { vi, beforeEach, describe, test, expect, Mock } from 'vitest'
+import { vi, beforeEach, describe, test, expect} from 'vitest'
+import type { Mock } from 'vitest'
 import request from 'supertest'
-import { getAIResponse } from '../../../server/utils/aiService'
+import { generateAiReview } from '../../../server/utils/aiService'
 import { searchMovies } from '../../../server/utils/movieService'
 import app from '../../components/App'
 
@@ -25,7 +26,7 @@ vi.mock('../../../server/utils/movieService', () => ({
 }))
 
 
-const mockedGetAIResponse = aiService.getAIResponse as unknown as Mock
+const mockedGetAIResponse = aiService.generateAiReview as unknown as Mock
 const mockedSearchMovies = movieService.searchMovies as unknown as Mock
 const mockedGetReviews = movieService.getReviews as unknown as Mock
 

@@ -1,4 +1,5 @@
 import { vi, describe, it, expect, beforeEach } from 'vitest'
+import type { Mock } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import MovieCard from '../../components/MovieCard'
@@ -52,7 +53,7 @@ describe('MovieCard', () => {
       rating: 4
     }
     
-    ;(aiClient.getCritic as vi.Mock).mockResolvedValue(mockAiResponse)
+    ;(aiClient.getCritic as Mock).mockResolvedValue(mockAiResponse)
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -76,7 +77,7 @@ describe('MovieCard', () => {
     const queryClient = createTestQueryClient()
     
     // Delay the mock response
-    ;(aiClient.getCritic as vi.Mock).mockImplementation(() => 
+    ;(aiClient.getCritic as Mock).mockImplementation(() => 
       new Promise(resolve => setTimeout(() => resolve({ content: 'Done' }), 100))
     )
 
